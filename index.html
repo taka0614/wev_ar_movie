@@ -19,26 +19,29 @@
     <a-scene embedded arjs="debugUIEnabled: false;" renderer="gammaOutput: true;" vr-mode-ui="enabled:false" >
 
      <!-- オブジェクトの読み込みここから -->
-     <a-assets>
-      <video id="movie" muted webkit-playsinline playsinline preload loop="true" src="movie.mp4"></video>
-  </a-assets>
-  <a-video
-      material="src: #movie_thumbnail"
-      width="16"
-      height="9"
-      movie
-  ></a-video>
-  <!-- オブジェクトの読み込みここまで -->
-  
-  <!-- マーカーの上に表示させるモデルの設定ここから -->
-    <a-marker preset="custom" type="pattern" url="pattern-bf_logo.patt"></a-marker>
-  <!-- マーカーの上に表示させるモデルの設定ここまで -->
-  
-  <!-- カメラの設定ここから -->
-    <a-entity camera></a-entity>
-  <!-- カメラの設定ここまで -->
-  
+     <a-scene>
+      <a-assets>
+        <video id="movie" autoplay loop="true" src="movie.mp4"></video>
+      </a-assets>
+    
+      <a-video src="#movie" width="16" height="9" position="0 0 -20"></a-video>
     </a-scene>
-  <!-- A-Frameのコードここまで -->
+    <a-assets>
+      <a-entity
+    id="playButton"
+    geometry="primitive: plane; height: 1; width: 1"
+    material="src: #play"
+    position="-7.3 -1.2 0.6"
+    rotation="0 90 0"
+    ></a-entity>
+
+    <a-entity
+    id="stopButton"
+    click-stop
+    geometry="primitive: plane; height: 1; width: 1"
+    material="src: #stop"
+    position="-7.3 -1.2 -0.67"
+    rotation="0 90 0"
+    ></a-entity>
   </body>
 </html>

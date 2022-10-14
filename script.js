@@ -1,30 +1,25 @@
-AFRAME.registerComponent('movie', {
-    init: function () {
-      const el = this.el
-  
-      let isPlayed = false
-      const movie = document.getElementById("movie")
-  
-      // a-videoがクリックされたら動画を再生
-      this.el.addEventListener("click", () => {
-        if(!isPlayed) {
-          el.attributes["material"].value = "src: #movie"
-          isPlayed = true
-        }
-  
-        if(movie.paused) {
-          movie.play()
-        }else {
-          movie.pause()
-        }
-      })
-  
-      // 動画の読み込みが完了したら動画を再生
-      // ただしiPhoneでは自動再生ができないのでクリックする必要がある
-      movie.addEventListener("loadeddata", () => {
-        aVideo.attributes["material"].value = "src: #movie"
-        isPlayed = true
-        movie.play()
-      })
+document.addEventListener("DOMContentLoaded", function(event) {
+    var scene = document.querySelector("a-scene");
+    var video = document.getElementById("bird");
+
+    if (scene.hasLoaded) {
+      run();
+    } else {
+      scene.addEventListener("loaded", run);
     }
+
+    function run () {
+      scene.querySelector("#playButton").addEventListener("click", function(e){
+            video.play();
+        });
+    }
+
   })
+
+  AFRAME.registerComponent('click-stop', {
+  init: function () {
+    this.el.addEventListener('click', function (event) {
+      document.getElementById("bird").pause();
+    });
+  }
+});
